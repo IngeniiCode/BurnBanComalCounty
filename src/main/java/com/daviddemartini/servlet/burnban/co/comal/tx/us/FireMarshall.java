@@ -11,7 +11,8 @@ package com.daviddemartini.servlet.burnban.co.comal.tx.us;
  */
 public class FireMarshall {
 
-    private static final String FMS_URL = "https://www.co.comal.tx.us/Fire_Marshal/Burn_Information.htm";
+    private static final String FMS_URL_OLD = "https://www.co.comal.tx.us/Fire_Marshal/Burn_Information.htm";
+    private static final String FMS_URL = "https://www.co.comal.tx.us/Fire_Marshal.htm";
 
     /**
      * Synthesize the FireMarshall CCFD Request URI

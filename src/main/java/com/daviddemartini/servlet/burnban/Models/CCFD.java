@@ -27,7 +27,7 @@ public class CCFD {
     public CCFD(String htmlContent){
 
         // define regex
-        Pattern banLinePattern = Pattern.compile("<p><span class=.auto-style1.>.+Burn Ban is ([ONF]+).+</span></p>");
+        Pattern banLinePattern = Pattern.compile("<span class=.auto-style2.>.+Burn Ban is ([ONF]+).+</span>");
         Matcher matcher = banLinePattern.matcher("");
         // break content into lines to simplify regex matching
         String[] lines = htmlContent.split("[\n\r]");
