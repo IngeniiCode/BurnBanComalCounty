@@ -22,7 +22,7 @@ public class HTML extends RequestHandler {
         String burnBanStatus = String.format(
                 "<span class='banPrefix'>Burn ban </span><span class='%s'>%s</span>",
                 (ccfd.getBurnBanOff()) ? "banOFF" : "banON",
-                ccfd.getBurnStatus());
+                ccfd.getBurnStatus().toUpperCase());
 
         String content = String.format(htmlTemplate(),
                 TITLE,

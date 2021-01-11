@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,19 +28,20 @@ public class CCFD {
     public CCFD(String htmlContent){
 
         // define regex
-        Pattern banLinePattern = Pattern.compile("<span class=.auto-style2.>.+Burn Ban is ([ONF]+).+</span>");
+        Pattern banLinePattern = Pattern.compile("burn ban is ([onf]+)");
         Matcher matcher = banLinePattern.matcher("");
         // break content into lines to simplify regex matching
         String[] lines = htmlContent.split("[\n\r]");
         for(String line: lines){
             line.trim();
             if(line.length() > 0) {
-                matcher = banLinePattern.matcher(line);
+                matcher = banLinePattern.matcher(line.toLowerCase());
                 if(matcher.find()){
-                    burnStatus = matcher.group(1);
-                    System.out.println("Ban is " + matcher.group(1));
+                    burnStatus = matcher.group(1).trim();
+                    System.out.println("Ban is [" + burnStatus + "]");
                     // set boolean if there is a match
-                    if(burnStatus == "OFF"){
+                    if(Objects.equals(burnStatus, "off")){
+                        System.out.println("Setting burnBanOff to : " + burnBanOff);
                         burnBanOff = true;
                     }
                     break;
