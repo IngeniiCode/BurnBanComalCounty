@@ -27,15 +27,31 @@ public class CCFD {
     }
     public CCFD(String htmlContent){
 
-        // define regex
-        Pattern banLinePattern = Pattern.compile("burn ban is ([onf]+)");
-        Matcher matcher = banLinePattern.matcher("");
+        // define regexs
+        Pattern patternBanLineStd = Pattern.compile("burn ban is ([onf]+)");
+        Pattern patternBanLineOther = Pattern.compile("burn ban is (.+)<");
+        Matcher matcher;
         // break content into lines to simplify regex matching
         String[] lines = htmlContent.split("[\n\r]");
+
+        // grind through the html lines looking for expected pattern.
         for(String line: lines){
             line.trim();
             if(line.length() > 0) {
-                matcher = banLinePattern.matcher(line.toLowerCase());
+                // Check for standard burn ban status response
+                matcher = patternBanLineStd.matcher(line.toLowerCase());
+                if(matcher.find()){
+                    burnStatus = matcher.group(1).trim();
+                    System.out.println("Ban is [" + burnStatus + "]");
+                    // set boolean if there is a match
+                    if(Objects.equals(burnStatus, "off")){
+                        System.out.println("Setting burnBanOff to : " + burnBanOff);
+                        burnBanOff = true;
+                    }
+                    break;
+                }
+                // Check for exceptional messages
+                matcher = patternBanLineOther.matcher(line.toLowerCase());
                 if(matcher.find()){
                     burnStatus = matcher.group(1).trim();
                     System.out.println("Ban is [" + burnStatus + "]");

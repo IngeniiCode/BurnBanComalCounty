@@ -2,11 +2,8 @@ package com.daviddemartini.servlet.burnban;
 
 import com.daviddemartini.servlet.burnban.Server.AppServer;
 import com.daviddemartini.servlet.burnban.Handler.JSON;
-import com.daviddemartini.servlet.burnban.Handler.HTML;
-
 import java.io.IOException;
 import java.util.Map;
-
 
 /**
  * Comal County Burn Ban Parsing Service
@@ -25,7 +22,6 @@ public class App {
         // Construct the Server
         Server = new AppServer(HOSTNAME,PORT);
         Server.addHandler("/json", new JSON());
-        Server.addHandler("/html", new HTML());
 
         // Start server
         Server.start();
